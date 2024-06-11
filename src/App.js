@@ -19,6 +19,8 @@ function App() {
       <ul>
         {pets.map((pet) => (
           <Pet
+            setPets={setPets}
+            id={pet.id}
             key={pet.id}
             name={pet.name}
             species={pet.species}
@@ -88,9 +90,14 @@ function LikeArea() {
 }
 
 function Pet(props) {
+  function handleDelete() {
+    alert("삭제버튼 클릭! 키값은 : " + props.id);
+    //props.setPets((prev) => prev.filter((pet) => pet.id !== props.key));
+  }
   return (
     <li>
       {props.name}은 {props.species}이고 {props.age}살 이다.
+      <button onClick={handleDelete}>삭제</button>
     </li>
   );
 }
