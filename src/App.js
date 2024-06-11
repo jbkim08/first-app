@@ -91,8 +91,9 @@ function LikeArea() {
 
 function Pet(props) {
   function handleDelete() {
-    alert("삭제버튼 클릭! 키값은 : " + props.id);
-    //props.setPets((prev) => prev.filter((pet) => pet.id !== props.key));
+    //alert("삭제버튼 클릭! 키값은 : " + props.id);
+    // filter 메서드로 펫의 id값이 다를경우에만 남긴다.(id값으로 삭제)
+    props.setPets((prev) => prev.filter((pet) => pet.id !== props.id));
   }
   return (
     <li>
