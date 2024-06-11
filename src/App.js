@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function App() {
-  //자바스크립트
-  const [pets, setPets] = useState([
-    { name: "줄리아", species: "cat", age: "5", id: 123456789 },
-    { name: "라이언", species: "dog", age: "3", id: 987654321 },
-    { name: "플로피", species: "rabbit", age: "2", id: 123123123 },
-    { name: "길동", species: "cat", age: "1", id: 456456456 },
-    { name: "진도", species: "dog", age: "6", id: 789789789 },
-  ]);
+  const [pets, setPets] = useState(JSON.parse(localStorage.getItem("PetData")));
+  //처음 한번([])
+  // useEffect(() => {
+  //   if (localStorage.getItem("PetData")) {
+  //     setPets(JSON.parse(localStorage.getItem("PetData")));
+  //   }
+  // }, []);
+  //pets 데이터가 수정될때마다 실행
+  useEffect(() => {
+    localStorage.setItem("PetData", JSON.stringify(pets));
+  }, [pets]);
   //자바스크립트와 태그를 같이 쓰는 문법을 JSX라고 한다(리액트 문법)
   return (
     <>
@@ -73,7 +76,14 @@ function AddPetForm(props) {
 }
 
 function LikeArea() {
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(
+    JSON.parse(localStorage.getItem("LikeCount"))
+  );
+  //추천수 데이터가 수정될때마다 실행
+  useEffect(() => {
+    localStorage.setItem("LikeCount", JSON.stringify(likeCount));
+  }, [likeCount]);
+
   function decreaseLike() {
     //라이크가 0 이하로 안떨어짐
     if (likeCount > 0) {
